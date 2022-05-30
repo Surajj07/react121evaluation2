@@ -1,47 +1,14 @@
-import React from 'react'
-import { useReducer } from 'react'
-import { createContext } from 'react'
+import React, { useReducer, useState } from 'react'
+import { Navigate } from 'react-router-dom'
+import { initState, Reducer } from './registerReducer'
 
-export const AuthContext=createContext()
+export const AuthContext = React.createContext()
 
-const intState={
-    isAuth:false,
-    token:null
+const AuthContextProvider = ({children})=>{
+    const [state, dispatch] = useReducer(Reducer , initState)
+    return (
+        <AuthContext.Provider value={[state, dispatch]}>{children}</AuthContext.Provider>
+    )
+
 }
-
-const authReducer=(state,action)=>{
-    switch(action.type){
-        case "registrationSuccess":{
-            return {
-                ...state,
-                isAuth:true,
-                token:action.payload
-            }
-        }
-        case "registrationFail":{
-            return {
-                ...state,
-                isAuth:false,
-                token:null
-            }
-        }
-        default : {
-            return state;
-        }
-    }
-}
-
-const AuthContextProvider = ({children}) => {
- 
-    const [state,dispatch]=useReducer(authReducer,intState)
-  return (
-    <div>
-        <AuthContext.Provider value={[state,dispatch]} >
-            {children}
-        </AuthContext.Provider>
-      
-    </div>
-  )
-}
-
 export default AuthContextProvider

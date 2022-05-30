@@ -1,23 +1,25 @@
 import React from 'react'
-import { Route } from 'react-router-dom'
-import { Link } from 'react-router-dom'
-import { Routes } from 'react-router-dom'
-
+import { Route, Routes,Link } from 'react-router-dom'
+import Dashboard from './Dashboard'
+import PrivateRoute from './PrivateRoute'
 import RegisterPageOne from './RegisterPageOne'
 import RegisterPageTwo from './RegisterPageTwo'
 
-const AllRoutes = () => {
+function AllRoutes() {
   return (
     <div>
-        <div style={{display:"flex",gap:"20px"}}>
-            <Link to="/register/one">Register 1</Link>
-            <Link to="/register/two">Register 2</Link>
-        </div>
-      <Routes>
-         
-          <Route path='/register/one' element={<RegisterPageOne/>}/>
-          <Route path='/register/two' element={<RegisterPageTwo/>}/>
-      </Routes>
+        <h1>Registration form</h1>
+      <Link to="/register/one">Click Here for registration</Link>
+        <Routes>
+            <Route path="/register/one/*" element={<RegisterPageOne/>}/>
+            <Route path="/register/two/*" element={<RegisterPageTwo/>} />
+            <Route path="/dashboard/*" element={
+                <PrivateRoute>
+                    <Dashboard/>
+                </PrivateRoute>
+            }
+            />
+        </Routes>
     </div>
   )
 }

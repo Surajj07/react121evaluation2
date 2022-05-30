@@ -1,19 +1,15 @@
-import React from 'react'
-import { useContext } from 'react'
-import { Navigate } from 'react-router-dom'
-import AuthContext from '../Context/AuthContext'
+import React, { useContext } from 'react'
+import { Navigate} from 'react-router-dom'
+import { RegistrationContext } from '../Context/RegistrationContextProvider'
 
-const PrivateRoute = ({children}) => {
-    const [state]=useContext(AuthContext)
-
-    if(state.isAuth)
-    {
+function PrivateRoute({children,to}) {
+    const [state,dispatch] = useContext(RegistrationContext)
+    console.log(state)
+    if(state.user && state.email && state.number && state.address)
         return children
-    }
+    
   return (
-    <div>
-      <Navigate to='/register/one'/>
-    </div>
+    <Navigate to={"/register/one"}/>
   )
 }
 

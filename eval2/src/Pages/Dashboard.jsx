@@ -1,11 +1,15 @@
-import { Link } from 'react-router-dom'
-import React from 'react'
+import React, { useContext } from 'react'
+import { RegistrationContext } from '../Context/RegistrationContextProvider'
 
-const Dashboard = () => {
+function Dashboard() {
+    const [state,dispatch] = useContext(RegistrationContext)
   return (
     <div>
-       
-      
+        <h1>Dashboard</h1>
+        <div>user:{state.user}</div>
+        <div>email:{state.email}</div>
+        <div>address:{state.address}</div>
+        <div>number:{state.number}</div>
     </div>
   )
 }

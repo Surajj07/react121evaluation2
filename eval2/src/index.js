@@ -5,14 +5,17 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import AuthContextProvider from './Context/AuthContext';
+import RegistrationContextProvider from './Context/RegistrationContextProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <AuthContextProvider>
-    <BrowserRouter>
-    <App />
-    </BrowserRouter>
+      <RegistrationContextProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+      </RegistrationContextProvider>
     </AuthContextProvider>
   </React.StrictMode>
 );
